@@ -1,5 +1,5 @@
-// definition of the Driveable interface
-interface Driveable {
+// definition of the Drivable interface
+export interface Drivable {
   // declare the properties
   started: boolean;
   currentSpeed: number;
@@ -11,6 +11,3 @@ interface Driveable {
   turn(direction: string): void;
   reverse(): void;
 }
-
-// export the Driveable interface
-export default Driveable;
