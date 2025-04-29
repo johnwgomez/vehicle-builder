@@ -3,8 +3,6 @@ import inquirer from "inquirer";
 import Truck from "./Truck.js";
 import Car from "./Car.js";
 import Motorbike from "./Motorbike.js";
-import Wheel from "./Wheel.js";
-
 // define the Cli class
 class Cli {
   // TODO: update the vehicles property to accept Truck and Motorbike objects as well
@@ -14,10 +12,10 @@ class Cli {
   selectedVehicleVin: string | undefined;
   exit: boolean = false;
 
-// TODO: Update the constructor to accept Truck and Motorbike objects as well
-constructor(vehicles: (Car | Truck | Motorbike)[]) {
-  this.vehicles = vehicles;
-}
+  // TODO: Update the constructor to accept Truck and Motorbike objects as well
+  constructor(vehicles: (Car | Truck | Motorbike)[]) {
+    this.vehicles = vehicles;
+  }
 
   // static method to generate a vin
   static generateVin(): string {
@@ -61,6 +59,7 @@ constructor(vehicles: (Car | Truck | Motorbike)[]) {
           name: 'vehicleType',
           message: 'Select a vehicle type',
           // TODO: Update the choices array to include Truck and Motorbike
+          // TODO: add statements to create a truck or motorbike if the user selects the respective vehicle type
           choices: ['Car'],
         },
       ])
@@ -69,7 +68,11 @@ constructor(vehicles: (Car | Truck | Motorbike)[]) {
           // create a car
           this.createCar();
         }
-        // TODO: add statements to create a truck or motorbike if the user selects the respective vehicle type
+        else if (answers.vehicleType === 'Truck') {
+          this.createTruck();
+        } else if (answers.vehicleType === 'Motorbike') {
+          this.createMotorbike();
+        }
       });
   }
 
@@ -174,6 +177,18 @@ constructor(vehicles: (Car | Truck | Motorbike)[]) {
         // TODO: push the truck to the vehicles array
         // TODO: set the selectedVehicleVin to the vin of the truck
         // TODO: perform actions on the truck
+        const truck = new Truck(
+          Cli.generateVin(),
+          answers.color,
+          answers.make,
+          answers.model,
+          parseInt(answers.year),
+          parseInt(answers.weight),
+          parseInt(answers.towingCapacity)
+        );
+        this.vehicles.push(truck);
+        this.selectedVehicleVin = truck.vin;
+        this.performActions();
       });
   }
 
@@ -237,12 +252,32 @@ constructor(vehicles: (Car | Truck | Motorbike)[]) {
         // TODO: push the motorbike to the vehicles array
         // TODO: set the selectedVehicleVin to the vin of the motorbike
         // TODO: perform actions on the motorbike
+        const front = new Wheel(
+          parseInt(answers.frontWheelDiameter),
+          answers.frontWheelBrand
+        );
+        const rear = new Wheel(
+          parseInt(answers.rearWheelDiameter),
+          answers.rearWheelBrand
+        );
+        const bike = new Motorbike(
+          Cli.generateVin(),
+          answers.make,
+          answers.model,
+          parseInt(answers.year),
+          parseInt(answers.weight),
+          front,
+          rear
+        );
+        this.vehicles.push(bike);
+        this.selectedVehicleVin = bike.vin;
+        this.performActions();
       });
   }
 
   // method to find a vehicle to tow
   // TODO: add a parameter to accept a truck object
-  findVehicleToTow(): void {
+  findVehicleToTow(truck: Truck): void {
     inquirer
       .prompt([
         {
@@ -261,6 +296,15 @@ constructor(vehicles: (Car | Truck | Motorbike)[]) {
         // TODO: check if the selected vehicle is the truck
         // TODO: if it is, log that the truck cannot tow itself then perform actions on the truck to allow the user to select another action
         // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
+        if (answers.vehicleToTow.vin === truck.vin) {
+          console.log("The truck cannot tow itself.");
+          this.selectedVehicleVin = truck.vin;
+          this.performActions();
+        } else {
+          truck.tow(answers.vehicleToTow);
+          this.selectedVehicleVin = truck.vin;
+          this.performActions();
+        }
       });
   }
 
@@ -282,6 +326,8 @@ constructor(vehicles: (Car | Truck | Motorbike)[]) {
             'Turn right',
             'Turn left',
             'Reverse',
+            'Tow',
+            'Wheelie',
             'Select or create another vehicle',
             'Exit',
           ],

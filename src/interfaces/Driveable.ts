@@ -1,5 +1,8 @@
 // definition of the Drivable interface
 export interface Drivable {
+  vin: string;
+  make: string;
+  model: string;
   // declare the properties
   started: boolean;
   currentSpeed: number;
