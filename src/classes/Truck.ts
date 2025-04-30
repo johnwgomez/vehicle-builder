@@ -35,7 +35,7 @@ class Truck extends Vehicle implements AbleToTow {
     wheels: Wheel[],
     towingCapacity: number
   ) {
-    super(make, model, year, weight);
+    super();
     this.vin = vin;
     this.color = color;
     this.make = make;
@@ -77,7 +77,7 @@ class Truck extends Vehicle implements AbleToTow {
     console.log(`Towing Capacity: ${this.towingCapacity} lbs`);
     console.log('Wheels:');
     this.wheels.forEach((wheel, index) => {
-      console.log(`  Wheel ${index + 1}: ${wheel.getDiameter()} inch, ${wheel.getTireBrand()} tire`);
+      console.log(`  Wheel ${index + 1}: ${wheel.getDiameter} inch, ${wheel.getTireBrand} tire`);
     });
   }
 }
