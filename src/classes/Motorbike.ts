@@ -29,7 +29,7 @@ import Wheel from './Wheel.js';
       topSpeed: number,
       wheels: Wheel[]
     ) {
-      super(make, model, year, weight);
+      super();
       this.vin = vin;
       this.color = color;
       this.make = make;
@@ -45,7 +45,7 @@ import Wheel from './Wheel.js';
     }
   // TODO: Implement the wheelie method
     // TODO: The method should log the message "Motorbike [make] [model] is doing a wheelie!"
-    wheelie(): void {
+    popWheelie(): void {
       console.log(`Motorbike ${this.make} ${this.model} is doing a wheelie!`);
     }
   // TODO: Override the printDetails method from the Vehicle class
@@ -59,7 +59,7 @@ import Wheel from './Wheel.js';
     console.log(`Top Speed: ${this.topSpeed} mph`);
     console.log('Wheels:');
     this.wheels.forEach((wheel, i) => {
-      console.log(`  Wheel ${i + 1}: ${wheel.getDiameter()} inch with a ${wheel.getTireBrand()} tire`);
+      console.log(`  Wheel ${i + 1}: ${wheel.getDiameter} inch with a ${wheel.getTireBrand} tire`);
     });
   }
 }
