@@ -1,9 +1,5 @@
-// definition of the Drivable interface
-export interface Driveable {
-  //vin: string;
-  //make: string;
-  //model: string;
-  //vehicle: string;
+// definition of the Driveable interface
+interface Driveable {
   // declare the properties
   started: boolean;
   currentSpeed: number;
@@ -15,3 +11,6 @@ export interface Driveable {
   turn(direction: string): void;
   reverse(): void;
 }
+
+// export the Driveable interface
+export default Driveable;

@@ -13,7 +13,7 @@ class Vehicle {
     // Method to start the vehicle
     start() {
         this.started = true;
-        console.log('Vehicle started');
+        console.log("Vehicle started");
     }
     // Method to accelerate the vehicle
     accelerate(change) {
@@ -23,7 +23,7 @@ class Vehicle {
             console.log(`Vehicle accelerated to ${this.currentSpeed} mph`);
         }
         else {
-            console.log('Start the vehicle first');
+            console.log("Start the vehicle first");
         }
     }
     // Method to decelerate the vehicle
@@ -34,14 +34,14 @@ class Vehicle {
             console.log(`Vehicle decelerated to ${this.currentSpeed} mph`);
         }
         else {
-            console.log('Start the vehicle first');
+            console.log("Start the vehicle first");
         }
     }
     // Method to stop the vehicle
     stop() {
         this.currentSpeed = 0;
         this.started = false;
-        console.log('Vehicle stopped');
+        console.log("Vehicle stopped");
     }
     // Method to turn the vehicle
     turn(direction) {
@@ -50,17 +50,17 @@ class Vehicle {
             console.log(`Vehicle turned ${direction}`);
         }
         else {
-            console.log('Start the vehicle first');
+            console.log("Start the vehicle first");
         }
     }
     // Method to reverse the vehicle
     reverse() {
         // Check if the vehicle is started
         if (this.started) {
-            console.log('Vehicle reversed');
+            console.log("Vehicle reversed");
         }
         else {
-            console.log('Start the vehicle first');
+            console.log("Start the vehicle first");
         }
     }
 }
